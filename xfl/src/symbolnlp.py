@@ -852,19 +852,20 @@ class SymbolNLP:
         word_sims = set()
         ac  = self.canonical_set(a)
         bc  = self.canonical_set(b)
-        outer_scores = []
+        # outer_scores = []
         for aw, bw in itertools.product(ac, bc):
-            inner_scores = []
+            # inner_scores = []
             synset_aw   = wn.synsets(aw)
             synset_bw   = wn.synsets(bw)
             for a_ss, b_ss in itertools.product(synset_aw, synset_bw):
                 d = wn.wup_similarity(a_ss, b_ss)
                 word_sims.add(d)
-                inner_scores.append(d)
-            if len(inner_scores) > 0:
-                outer_scores.append(max(inner_scores))
+        #         inner_scores.append(d)
+        #     if len(inner_scores) > 0:
+        #         outer_scores.append(max(inner_scores))
 
-        return np.mean(outer_scores) if len(outer_scores) > 0 else 0.0
+        # return np.mean(outer_scores) if len(outer_scores) > 0 else 0.0
+        return max(word_sims) if len(word_sims) > 0 else 0.0
 
 
     def alpha_numeric_set(self, name):
