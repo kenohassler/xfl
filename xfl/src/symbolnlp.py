@@ -692,8 +692,8 @@ class SymbolNLP:
         return words
 
     def canonical_name(self, name):
-        #return '_'.join( self.canonical_set(name) )
-        return '_'.join(SymbolNLP.find_label_order(name, self.canonical_set(name)))
+        return '_'.join( self.canonical_set(name) )
+        #return '_'.join(SymbolNLP.find_label_order(name, self.canonical_set(name)))
 
     @staticmethod
     def find_label_order(name: str, labels: set):
@@ -821,14 +821,14 @@ class SymbolNLP:
                 #abbrs = self.quick_subabbreviations(subword)
 
                 #print("computing best cut of rod with {} and {}".format(word, abbrs))
-                #abbr = self.best_cut_of_the_rod(subword, abbrs)
-                abbr = self.nonoverlapping_substrings(subword, abbrs)
+                abbr = self.best_cut_of_the_rod(subword, abbrs)
+                #abbr = self.nonoverlapping_substrings(subword, abbrs)
                 #print(abbr)
 
                 #replace words with abbreviatiosn if they are abbreviations
-                #expanded_words = set(map(lambda x: self.abbreviations[x] if x in self.abbreviations else x, abbr))
-                #list_of_lists = list(map(lambda x: re.findall(r'[a-zA-Z]+', x), expanded_words))
-                list_of_lists = list(map(lambda x: re.findall(r'[a-zA-Z]+', x), abbr))
+                expanded_words = set(map(lambda x: self.abbreviations[x] if x in self.abbreviations else x, abbr))
+                list_of_lists = list(map(lambda x: re.findall(r'[a-zA-Z]+', x), expanded_words))
+                #list_of_lists = list(map(lambda x: re.findall(r'[a-zA-Z]+', x), abbr))
 
                 #add original if no abbreveation or word found
                 if len(list_of_lists) == 0:
